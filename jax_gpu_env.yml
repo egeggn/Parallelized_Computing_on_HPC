@@ -1,0 +1,30 @@
+# This is an example yaml file for creating a conda environment with CUDA enabled JAX
+# Change the dependencies according to your needs
+
+name: jax_gpu_env # name of your new conda virtual environment
+channels:
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - nvidia::cuda-nvcc=12.4  # This should match your cluster's hardware capability
+  - gxx_linux-64            # Essential for XLA to compile C++ kernels
+  - pip:
+      - --find-links https://storage.googleapis.com/jax-releases/jax_cuda_releases.html # Enforce pip to search for the jax_cuda files here
+      - "jax[cuda12]"   
+      - flax
+      - optax
+      - chex
+      - numpy
+      - scipy
+      - pandas
+
+      # Plotting / visualization
+      - matplotlib
+      - seaborn
+
+      # Utilities
+      - tqdm
+      - qutip
